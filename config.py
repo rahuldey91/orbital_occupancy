@@ -56,6 +56,16 @@ def parse_args():
     parser.add_argument('--dataset-type', type=str, default=None, help='dataset type')
     parser.add_argument('--data-fraction', type=float, default=1)
 
+    # ================================ Dataset Settings ==================================
+    parser.add_argument('--circle-r', type=json.loads, default=[], help='inner and outer radius of circle')
+    parser.add_argument('--ellipse1', type=json.loads, default=[], help='a and b parameters of ellipse 1')
+    parser.add_argument('--ellipse2', type=json.loads, default=[], help='a and b parameters of ellipse 2')
+    parser.add_argument('--circle-o', type=json.loads, default=[0, 0], help='center of circle')
+    parser.add_argument('--ellipse-o', type=json.loads, default=[0, 0], help='center of ellipse')
+    parser.add_argument('--points-range', type=json.loads, default=[0, 1], help='range of points to sample from e.g. [0, 1]')
+    parser.add_argument('--train-len', type=int, default=1000, help='number of training points')
+    parser.add_argument('--val-len', type=int, default=100, help='number of validation points')
+
     # ======================= Network Model Settings ============================
     parser.add_argument('--model-type', type=str, default=None, help='type of network')
     parser.add_argument('--model-options', type=json.loads, default={}, metavar='', help='additional model-specific parameters, i.e. \'{"nstack": 1}\'')

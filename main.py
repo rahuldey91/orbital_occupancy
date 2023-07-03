@@ -80,9 +80,10 @@ def main():
     color_dict = {(0,0): 'cyan', (0,1): 'yellow', (1,0): 'red', (1,1): 'orange'}
     fig = plt.plot()
     for i in range(1000):
-        x = torch.rand(64) * 10 - 5
-        y = torch.rand(64) * 10 - 5
-        points = torch.stack((x, y)).transpose(1,0).to(model.device)
+        # x = torch.rand(64) * 10 - 5
+        # y = torch.rand(64) * 10 - 5
+        # points = torch.stack((x, y)).transpose(1,0).to(model.device)
+        points = torch.rand(64, 2).uniform_(args.points_range[0], args.points_range[1])
         with torch.no_grad():
             class_c, class_e = model(points)
         outputs = torch.stack((class_c, class_e)).transpose(1,0)
@@ -91,7 +92,7 @@ def main():
             colors.append(color_dict[tuple(outputs[j].numpy())])
         # colors = np.array(colors)/255
         plt.scatter(points[:,0], points[:,1], c=colors, marker='.', s=5)
-    plt.savefig(f'output_plot_f{args.data_fraction}.png')
+    plt.savefig(f'output_plot_f{args.train_len}.png')
     print('Done')
 
 
